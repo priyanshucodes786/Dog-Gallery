@@ -1,0 +1,115 @@
+/* --- Basic Setup & Typography --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #fff;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #7f8c8d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Grid Container --- */
+/* This is the main container for our image gallery. */
+.gallery-container {
+    display: grid; /* This is the magic! It turns the container into a grid. */
+    
+    /* 
+       This property defines the columns of the grid.
+       repeat(5, 1fr) is a shortcut for "1fr 1fr 1fr 1fr 1fr".
+       'fr' is a fractional unit, meaning each column takes up 1 equal fraction of the available space.
+       This is the DESKTOP view (5 columns).
+    */
+    grid-template-columns: repeat(5, 1fr);
+
+    /* This adds a gap between the grid items (both rows and columns). */
+    gap: 1rem; 
+
+    /* Add some padding around the whole gallery. */
+    padding: 1rem;
+    max-width: 1400px; /* Prevents the gallery from becoming too wide on huge screens. */
+    margin: 0 auto; /* Centers the gallery on the page. */
+}
+
+/* --- Grid Items & Images --- */
+.gallery-item {
+    overflow: hidden; /* Hides any part of the image that might overflow due to border-radius. */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05); /* Slightly enlarge the item on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+    width: 100%; /* Makes the image fill the entire width of its container (.gallery-item). */
+    height: 100%; /* Makes the image fill the entire height. */
+    display: block; /* Removes any extra space below the image. */
+    
+    /* 
+       This is crucial for preventing image distortion.
+       It crops the image to fit its container, maintaining aspect ratio,
+       much like 'background-size: cover'.
+    */
+    object-fit: cover; 
+}
+
+
+/* --- Responsive Design with Media Queries --- */
+
+/* For TABLETS: When the screen is 992px wide or less */
+@media (max-width: 992px) {
+    .gallery-container {
+        /* Change the grid to have 3 columns instead of 5. */
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+/* For MOBILE PHONES: When the screen is 600px wide or less */
+@media (max-width: 600px) {
+    .gallery-container {
+        /* Change the grid to have 2 columns for small screens. */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem; /* Slightly smaller gap for smaller screens */
+        padding: 0.75rem;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+}
